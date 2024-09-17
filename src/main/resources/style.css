@@ -1,11 +1,15 @@
 /* Estilos gerais */
-head {
-    font-family: "Arial Black", serif;
-    background-color: hsl(211, 100%, 50%);
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
+
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f0f2f5;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #1e90ff, #00bfff);
     margin: 0;
     padding: 0;
     display: flex;
@@ -14,77 +18,109 @@ body {
     height: 100vh;
 }
 
+/* Container principal */
 .container {
     background-color: #ffffff;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
     max-width: 600px;
     width: 100%;
     text-align: center;
+    transition: transform 0.3s ease;
 }
 
+.container:hover {
+    transform: scale(1.03);
+}
+
+/* Cabeçalho */
 h1 {
     color: #333;
-    margin-bottom: 20px;
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 30px;
 }
 
-label {
-    font-weight: bold;
-    margin-bottom: 5px;
-    display: block;
-    text-align: left;
-    color: #555;
-}
-
+/* Inputs */
 .form-row {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
+    width: 100%;
 }
 
 .form-row input {
-    width: 30%; /* Alinha os três campos de dia, mês e ano */
-    padding: 10px;
-    border-radius: 5px;
+    width: 50%; /* Distribui os três inputs igualmente */
+    padding: 12px;
+    border-radius: 8px;
     border: 1px solid #ccc;
     font-size: 16px;
     background-color: #f8f8f8;
     transition: all 0.3s ease;
+    text-align: center;
 }
 
 input:focus {
     border-color: #007bff;
     background-color: #fff;
+    box-shadow: 0px 0px 5px rgba(0, 123, 255, 0.5);
 }
 
+/* Labels embaixo dos inputs */
+.form-row label {
+    font-weight: bold;
+    margin-top: 5px; /* Espaçamento entre o input e o label */
+    display: block;
+    text-align: center;
+    color: #555;
+    font-size: 14px;
+}
+
+/* Botão */
 button {
-    background-color: #007bff;
+    background: linear-gradient(135deg, #007bff, #0056b3);
     color: white;
-    padding: 10px 20px;
+    padding: 12px 20px;
     border: none;
-    border-radius: 5px;
-    font-size: 16px;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 600;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease;
     width: 100%;
 }
 
 button:hover {
     background-color: #0056b3;
+    transform: translateY(-3px);
+    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.1);
 }
 
+/* Resultado */
 #resultant {
-    margin-top: 20px;
-    background-color: #f8f8f8;
+    margin-top: 30px;
+    background-color: #f1f1f1;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
     text-align: left;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #333;
 }
 
 #resultant p {
-    color: #333;
     font-size: 18px;
-    line-height: 1.6;
+    margin-bottom: 10px;
+    font-weight: 400;
+}
+
+/* Estilos adicionais */
+input, button {
+    transition: all 0.3s ease;
+}
+
+input:focus {
+    outline: none;
 }

@@ -10,6 +10,8 @@ document.getElementById('idadeForm').addEventListener('submit', function(event) 
         ano: parseInt(ano)
     };
 
+    console.log("Dados enviados:", data);
+
     fetch('http://localhost:8080/api/idade/calcular', {
         method: 'POST',
         headers: {
@@ -18,21 +20,33 @@ document.getElementById('idadeForm').addEventListener('submit', function(event) 
         body: JSON.stringify(data)
     })
         .then(response => {
-            if (!response.ok) {
-                throw new Error('Erro na solicitação');
+            const contentType = response.headers.get("content-type");
+            if (contentType && contentType.indexOf("application/json") !== -1) {
+                return response.json().then(data => {
+                    if (!response.ok) {
+                        throw new Error(data.error || "Erro ao calcular a idade");
+                    }
+                    return data;
+                });
+            } else {
+                return response.text().then(text => {
+                    throw new Error(text);
+                });
             }
-            return response.json();
         })
         .then(result => {
-            // Exibe o resultado na página
             document.getElementById('resultant').innerHTML = `
-            <p>Sua idade é: ${result.anos} anos, ${result.meses} meses e ${result.dias} dias.</p>
+            <p>Sua idade é: </p>
+            <p>${result.anos} anos, ${result.meses} meses e ${result.dias} dias.</p>
             <p>Desde seu nascimento já se passaram aproximadamente:</p>
-            <p>${result.diasPercorridos} dias, ${result.horasPercorridas} horas, ${result.minutosPercorridos} minutos.</p>
+            <p>${result.diasPercorridos} dias, 
+            <p>${result.horasPercorridas} horas, 
+            <p>${result.minutosPercorridos} minutos.</p>
         `;
         })
         .catch(error => {
-            console.error('Erro:', error);
-            document.getElementById('resultant').innerHTML = '<p>Ocorreu um erro ao calcular a idade. Tente novamente mais tarde.</p>';
+            console.error('Erro completo:', error);
+            document.getElementById('resultant').innerHTML = `<p style="color: red;">Erro: ${error.message}</p>`;
         });
 });
+
